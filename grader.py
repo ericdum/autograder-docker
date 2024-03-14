@@ -1,4 +1,4 @@
-from .go_for_docker import Go4Docker
+from go_for_docker import Go4Docker
 import json
 
 case_grade_for_file = """
@@ -23,5 +23,4 @@ def grade_for_file(target, cases):
 
     g4t = Go4Docker(dir="./out", target=target)
 
-    result = g4t.test()
-    return result["passed"] / result["total"]
+    return g4t.test()
