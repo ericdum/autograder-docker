@@ -13,7 +13,14 @@ def test_runfile(input, expected, args):
         runfile(input or "", expected or "", args=args)
 """
 
-def grade_for_file(target, cases):
+def grade_for_file(target, cases, debug=False):
+    if isinstance(cases, str):
+        try:
+            cases = json.loads(cases)
+        except ValueError:
+            print("Cases is not valid JSON.")
+            return None
+
     with open('./out/target/main.py', 'w') as f:
         f.write(target)
 
@@ -21,6 +28,6 @@ def grade_for_file(target, cases):
         f.write(case_grade_for_file.replace("<<<replace_case>>>",
                                             json.dumps(cases)))
 
-    g4t = Go4Docker(dir="./out", target=target)
+    g4t = Go4Docker(dir="./out", target=target, debug=debug)
 
     return g4t.test()
