@@ -16,6 +16,9 @@
 pip install -r requirements.txt
 
 docker build -t autograder .
+
+# test from terminal
+python cmd.py _code.py _case.json
 ```
 
 ```python
